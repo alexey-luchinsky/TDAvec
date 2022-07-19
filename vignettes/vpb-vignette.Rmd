@@ -1,0 +1,86 @@
+---
+title: "vpb-vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{vpb-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(vpb)
+```
+
+VPB package is used to create the Vector Persistence Blocks for the gigen topology diagram. You can find more details on the topic in the article
+
+    Kit C. Chan, Umar Islambekov, Alexey Luchinsky, Rebecca Sanders, "A computationally efficient framework for vector representation of persistence diagrams", arXiv:2109.08239
+
+Let us first create the some sample data set:
+
+```{r}
+# sample 100 points uniformly from unit circle and add Gaussian noise
+N <- 100
+set.seed(123)
+X <- TDA::circleUnif(N) + rnorm(2*N,mean = 0,sd = 0.2)
+plot(X, asp=1)
+```
+
+We can use TDA package to create topology diagram from it:
+
+```{r}
+D <- TDA::ripsDiag(X,maxdimension = 1,maxscale = 2)$diagram
+```
+
+```{r}
+# switch from birth-death to birth-persistence coordinates
+D[,3] <- D[,3] - D[,2] 
+colnames(D)[3] <- "Persistence"
+head(D)
+```
+
+```{r}
+library(ggplot2)
+library(magrittr)
+```
+
+Here is the plot of this presistence diagram
+
+```{r}
+df <- data.frame(dim=as.factor(D[,1]), birth=D[,2], persistence = D[,3])
+df %>% 
+  ggplot(aes(x=birth, y=persistence, shape=dim, color = dim)) + geom_point() +
+  geom_abline(intercept = 0, slope = 1)
+```
+
+Let us now compute the Vector Persistence Block of this diagram with homological dimension H0 and tau=0.3
+
+```{r}
+ySeqH0 <- unique(quantile(D[D[,1]==0,3],probs = seq(0,1,by=0.1)))
+T0 <- computeVPB(D,homDim = 0,xSeq=NA,ySeqH0,tau = 0.3)
+T0
+```
+
+The same result can be achieved using the C++ version of the function
+
+```{r}
+T0_C <- computeVPBcpp(D,homDim = 0,xSeq=NA,ySeqH0,tau = 0.3)
+T0_C
+
+```
+
+Here it the H1 result
+
+```{r}
+xSeqH1 <- unique(quantile(D[D[,1]==1,2],probs = seq(0,1,by=0.2)))
+ySeqH1 <- unique(quantile(D[D[,1]==1,3],probs = seq(0,1,by=0.2)))
+computeVPB(D,homDim = 1,xSeqH1,ySeqH1,tau = 0.3) 
+computeVPBcpp(D,homDim = 1,xSeqH1,ySeqH1,tau = 0.3) # compare with C++ version
+```
+

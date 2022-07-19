@@ -4,7 +4,7 @@ Title: Vector Persistense Block
 Version: 0.1.0
 Author: Kit C. Chan, Umar Islambekov, Alexey Luchinsky, Rebecca Sanders
 Maintainer: Alexey Luchinsky <aluchi@bgsu.edu>
-Description:{Caclaulates the Vector Persistense Block
+Description: {Caclaulates the Vector Persistense Block
     See paper https://arxiv.org/abs/2109.08239 for more details
     }
 License: GPL (>= 2)
@@ -12,3 +12,7 @@ Encoding: UTF-8
 LazyData: true
 Imports: Rcpp (>= 1.0.9), TDAstats, TDA
 LinkingTo: Rcpp
+Suggests: 
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr
