@@ -1,4 +1,4 @@
 exportPattern("^[[:alpha:]]+")
 importFrom(Rcpp, evalCpp)
 importFrom("stats", "pnorm")
-useDynLib(vpb, .registration = TRUE)
+useDynLib(TDAvec, .registration = TRUE)
