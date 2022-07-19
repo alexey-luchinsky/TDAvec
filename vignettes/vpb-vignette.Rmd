@@ -45,19 +45,19 @@ colnames(D)[3] <- "Persistence"
 head(D)
 ```
 
-```{r}
-library(ggplot2)
-library(magrittr)
-```
 
 Here is the plot of this presistence diagram
 
 ```{r}
-df <- data.frame(dim=as.factor(D[,1]), birth=D[,2], persistence = D[,3])
-df %>% 
-  ggplot(aes(x=birth, y=persistence, shape=dim, color = dim)) + geom_point() +
-  geom_abline(intercept = 0, slope = 1)
+D0 = D[D[,1]==0,]
+D1 = D[D[,1]==1,]
+plot(D0[,2], D0[,3], pch=1, xlim=c(0,0.5), col="red", xlab="Birth", ylab="Persistense")
+points(D1[,2], D1[,3], pch=2, col="blue")
+abline(a=0, b=1)
+legend("topright", legend = c("H=0", "H=1"), pch = c(1,2), col=c("red", "blue"))
 ```
+
+
 
 Let us now compute the Vector Persistence Block of this diagram with homological dimension H0 and tau=0.3
 
