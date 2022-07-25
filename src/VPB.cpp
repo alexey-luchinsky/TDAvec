@@ -3,23 +3,12 @@
 using namespace Rcpp;
 using namespace std;
 
-IntegerVector which_C(LogicalVector vec) {
-  int n = sum(vec);
-  IntegerVector outC(n);
-  int k =0;
-  for(int i=0; i<vec.size(); ++i) {
-    if(vec[i]) {
-      outC[k]=i;
-      ++k;
-    }
-  }
-  return outC;
-}
 
 // [[Rcpp::export]]
 NumericVector computeVPBcpp(NumericMatrix D, int homDim, 
                                 NumericVector xSeq, NumericVector ySeq,
                                 double tau) {
+  IntegerVector which_C(LogicalVector vec);
   int n_rows = 0; // number of rows with the correct dimension
   for(int i=0; i<D.nrow(); ++i) {
     if(D(i,0) == homDim) {
@@ -91,4 +80,17 @@ NumericVector computeVPBcpp(NumericMatrix D, int homDim,
     }
     return vpb;
   }
+}
+
+IntegerVector which_C(LogicalVector vec) {
+  int n = sum(vec);
+  IntegerVector outC(n);
+  int k =0;
+  for(int i=0; i<vec.size(); ++i) {
+    if(vec[i]) {
+      outC[k]=i;
+      ++k;
+    }
+  }
+  return outC;
 }
