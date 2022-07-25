@@ -3,7 +3,7 @@
 using namespace Rcpp;
 
 //' @export
-// [[Rcpp::export]]
+// [[Rcpp::export("computeVPBcpp")]]
 NumericVector computeVPBcpp(NumericMatrix D, int homDim, 
                                 NumericVector xSeq, NumericVector ySeq,
                                 double tau) {
