@@ -1,7 +1,6 @@
 #include <Rcpp.h>
 #include <iostream>
 using namespace Rcpp;
-using namespace std;
 
 //' @export
 // [[Rcpp::export]]
@@ -39,8 +38,8 @@ NumericVector computeVPBcpp(NumericMatrix D, int homDim,
         if( (y[j] > c - lambda[j]) & (y[j] < d+lambda[j])) {
           double y_cd = y[j];
           double lambda_cd = lambda[j];
-          double yMin = max(c, y_cd - lambda_cd);
-          double yMax = min(d, y_cd + lambda_cd);
+          double yMin = std::max(c, y_cd - lambda_cd);
+          double yMax = std::min(d, y_cd + lambda_cd);
           vpb[i] += 0.5*(yMax*yMax-yMin*yMin)/dy[i] ;
         }
       }
