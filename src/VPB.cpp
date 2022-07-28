@@ -3,8 +3,8 @@
 using namespace Rcpp;
 
 //' @export
-// [[Rcpp::export("computeVPBcpp")]]
-NumericVector computeVPBcpp(NumericMatrix D, int homDim, 
+// [[Rcpp::export]]
+NumericVector computeVPB(NumericMatrix D, int homDim, 
                                 NumericVector xSeq, NumericVector ySeq,
                                 double tau) {
   IntegerVector which_C(LogicalVector vec);

@@ -61,7 +61,7 @@ NumericVector PSurfaceHk(NumericVector point,
 }
 
 // [[Rcpp::export]]
-NumericVector computePIcpp(NumericMatrix D,int homDim,
+NumericVector computePI(NumericMatrix D,int homDim,
                            int res, double sigma,
                            double minB, double maxB,
                            double minP, double maxP){

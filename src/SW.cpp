@@ -3,7 +3,7 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-double computeSWdistcpp(NumericMatrix d1, NumericMatrix d2, int homDim, int M=10){
+double computeSWdist(NumericMatrix d1, NumericMatrix d2, int homDim, int M=10){
   int n1 = 0; // number of rows with the correct dimension
   for(int i=0;i<d1.nrow();++i){
     if(d1(i,0) == homDim){
