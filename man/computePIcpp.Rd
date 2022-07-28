@@ -5,7 +5,7 @@
   computePIcpp(D,homDim,res,sigma,minB,maxB,minP,maxP)
 }
 \arguments{
-  \item{D}{N by 3 matrix (columns contain dimension, birth and persistence values respectively)}
+  \item{D}{this is a N by 3 matrix (columns contain dimension, birth and persistence values respectively)}
   \item{homDim}{homological dimension (0 for H0, 1 for H1, etc.)}
   \item{res}{resolution parameter}
   \item{sigma}{sigma parameter}
