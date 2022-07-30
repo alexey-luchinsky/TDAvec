@@ -70,11 +70,37 @@ computeSWdist <- function(d1, d2, homDim, M = 10L) {
     .Call(`_TDAvec_computeSWdist`, d1, d2, homDim, M)
 }
 
+#' Vector Persistense Blocks
+#' 
+#' @param D N by 3 matrix (columns contain dimension, birth and persistence values respectively)
+#' @param homDim homological dimension (0 for H0, 1 for H1, etc.)
+#' @param scaleSeq sequence of scale values for vectorization
+#' @examples
+#' N <- 100
+#' set.seed(123)
+#' X <- TDA::circleUnif(N) + rnorm(2*N,mean = 0,sd = 0.2)
+#' D <- TDA::ripsDiag(X,maxdimension = 1,maxscale = 2)$diagram
+#' scaleSeq = seq(0,2,length.out=11)
+#' computeVAB(D,homDim = 0,scaleSeq)
+#' computeVAB(D,homDim = 1,scaleSeq)
 computeVAB <- function(D, homDim, scaleSeq) {
     .Call(`_TDAvec_computeVAB`, D, homDim, scaleSeq)
 }
 
-#' @export
+#' Calculates the Vector Persistence Block
+#' 
+#' @param D N by 3 matrix (columns contain dimension, birth and persistence values respectively)
+#' @param homDim homological dimension (0 for H0, 1 for H1, etc.)
+#' @param xSeq sequence of x (birth) values of the grid vertices
+#' @param ySeq sequence of y (persistence) values of the grid vertices
+#' @param tau parameter (between 0 and 1) controlling block width. weight function w(x,y) = x+y
+#' @examples
+#' X <- TDAstats::circle2d + rnorm(200,mean = 0,sd = 0.1)
+#' D <- TDAstats::calculate_homology(X,dim = 1,threshold = 2)
+#' D[,3] <- D[,3] - D[,2]
+#' xSeq <- unique(quantile(D[D[,1]==1,2],probs = seq(0,1,by=0.1)))
+#' ySeq <- unique(quantile(D[D[,1]==1,3],probs = seq(0,1,by=0.1)))
+#' computeVPB(D,homDim = 0, xSeq=xSeq, ySeq,tau = 0.5)
 computeVPB <- function(D, homDim, xSeq, ySeq, tau) {
     .Call(`_TDAvec_computeVPB`, D, homDim, xSeq, ySeq, tau)
 }
