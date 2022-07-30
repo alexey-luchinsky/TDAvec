@@ -10,6 +10,7 @@ Encoding: UTF-8
 LazyData: true
 Imports: Rcpp (>= 1.0.9), TDAstats, TDA
 LinkingTo: Rcpp
-Suggests: 
-    knitr
+Suggests: knitr
 VignetteBuilder: knitr
+NeedsCompilation: yes
+Packaged: 2022-07-28 23:41:55 UTC; luchinsky
