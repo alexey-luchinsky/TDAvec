@@ -60,6 +60,33 @@ NumericVector PSurfaceHk(NumericVector point,
   return wgt*outer_C(out1,out2); 
 }
 
+//' Calculates the Persistence Image
+//' 
+//' @param D N by 3 matrix (columns contain dimension, birth and persistence values respectively)
+//' @param homDim homological dimension (0 for H0, 1 for H1, etc.)
+//' @param res resolution parameter
+//' @param sigma sigma parameter
+//' @param minB minimal birth value
+//' @param maxB maximal birth value
+//' @param minP minimal persistance value
+//' @param maxP maxzimal persistance value
+//' @examples
+//' N <- 100
+//' set.seed(123)
+//' X <- TDA::circleUnif(N) + rnorm(2*N,mean = 0,sd = 0.2)  
+//' D <- TDA::ripsDiag(X,maxdimension = 1,maxscale = 2)$diagram 
+//' D[,3] <- D[,3] - D[,2] 
+//' colnames(D)[3] <- "Persistence"
+//' res <- 5 # resolution or grid size
+//'   
+//' minPH0 <- min(D[D[,1]==0,3]); maxPH0 <- max(D[D[,1]==0,3])
+//' sigma <- 0.5*(maxPH0-minPH0)/res
+//' computePI(D,homDim=0,res,sigma,minB=NA,maxB=NA,minPH0,maxPH0)
+//'     
+//' minBH1 <- min(D[D[,1]==1,2]); maxBH1 <- max(D[D[,1]==1,2])
+//' minPH1 <- min(D[D[,1]==1,3]); maxPH1 <- max(D[D[,1]==1,3])
+//' sigma <- 0.5*(maxPH1-minPH1)/res # default way of selecting sigma - can be overridden 
+//' computePI(D,homDim=1,res,sigma,minBH1,maxBH1,minPH1,maxPH1)
 // [[Rcpp::export]]
 NumericVector computePI(NumericMatrix D,int homDim,
                            int res, double sigma,
