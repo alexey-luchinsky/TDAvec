@@ -23,6 +23,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// computePES
+NumericVector computePES(NumericMatrix D, int homDim, NumericVector scaleSeq);
+RcppExport SEXP _TDAvec_computePES(SEXP DSEXP, SEXP homDimSEXP, SEXP scaleSeqSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type D(DSEXP);
+    Rcpp::traits::input_parameter< int >::type homDim(homDimSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type scaleSeq(scaleSeqSEXP);
+    rcpp_result_gen = Rcpp::wrap(computePES(D, homDim, scaleSeq));
+    return rcpp_result_gen;
+END_RCPP
+}
 // computePI
 NumericVector computePI(NumericMatrix D, int homDim, int res, double sigma, double minB, double maxB, double minP, double maxP);
 RcppExport SEXP _TDAvec_computePI(SEXP DSEXP, SEXP homDimSEXP, SEXP resSEXP, SEXP sigmaSEXP, SEXP minBSEXP, SEXP maxBSEXP, SEXP minPSEXP, SEXP maxPSEXP) {
@@ -114,6 +127,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_TDAvec_computeECC", (DL_FUNC) &_TDAvec_computeECC, 3},
+    {"_TDAvec_computePES", (DL_FUNC) &_TDAvec_computePES, 3},
     {"_TDAvec_computePI", (DL_FUNC) &_TDAvec_computePI, 8},
     {"_TDAvec_computePL", (DL_FUNC) &_TDAvec_computePL, 4},
     {"_TDAvec_computePS", (DL_FUNC) &_TDAvec_computePS, 4},
