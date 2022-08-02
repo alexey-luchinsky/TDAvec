@@ -93,10 +93,6 @@ computePS <- function(D, homDim, p, scaleSeq) {
     .Call(`_TDAvec_computePS`, D, homDim, p, scaleSeq)
 }
 
-computeSWdist <- function(d1, d2, homDim, M = 10L) {
-    .Call(`_TDAvec_computeSWdist`, d1, d2, homDim, M)
-}
-
 #' Vector Persistense Blocks
 #' 
 #' @param D N by 3 matrix (columns contain dimension, birth and persistence values respectively)

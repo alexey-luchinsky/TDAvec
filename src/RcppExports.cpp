@@ -82,20 +82,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// computeSWdist
-double computeSWdist(NumericMatrix d1, NumericMatrix d2, int homDim, int M);
-RcppExport SEXP _TDAvec_computeSWdist(SEXP d1SEXP, SEXP d2SEXP, SEXP homDimSEXP, SEXP MSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type d1(d1SEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type d2(d2SEXP);
-    Rcpp::traits::input_parameter< int >::type homDim(homDimSEXP);
-    Rcpp::traits::input_parameter< int >::type M(MSEXP);
-    rcpp_result_gen = Rcpp::wrap(computeSWdist(d1, d2, homDim, M));
-    return rcpp_result_gen;
-END_RCPP
-}
 // computeVAB
 NumericVector computeVAB(NumericMatrix D, int homDim, NumericVector scaleSeq);
 RcppExport SEXP _TDAvec_computeVAB(SEXP DSEXP, SEXP homDimSEXP, SEXP scaleSeqSEXP) {
@@ -131,7 +117,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_TDAvec_computePI", (DL_FUNC) &_TDAvec_computePI, 8},
     {"_TDAvec_computePL", (DL_FUNC) &_TDAvec_computePL, 4},
     {"_TDAvec_computePS", (DL_FUNC) &_TDAvec_computePS, 4},
-    {"_TDAvec_computeSWdist", (DL_FUNC) &_TDAvec_computeSWdist, 4},
     {"_TDAvec_computeVAB", (DL_FUNC) &_TDAvec_computeVAB, 3},
     {"_TDAvec_computeVPB", (DL_FUNC) &_TDAvec_computeVPB, 5},
     {NULL, NULL, 0}
