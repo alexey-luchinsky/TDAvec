@@ -41,7 +41,8 @@ NumericVector computeVPB(NumericMatrix D, int homDim,
   NumericVector lambda = tau*y;
   NumericVector dy = diff(ySeq);
   int m = dy.size();
-  if ((sum(abs(x))==0)&(homDim==0)) {
+  double sumB = sum(abs(diff(x)));
+  if ((homDim==0)&(sumB==0)) {
     NumericVector vpb(m); 
     for(int i=0; i<m; ++i) {
       double c = ySeq[i];
