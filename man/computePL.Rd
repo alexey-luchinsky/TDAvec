@@ -27,6 +27,8 @@ A numeric vector where i-th element is the value of k-th order landscape functio
 1. Bubenik, P. (2015). Statistical topological data analysis using persistence landscapes. Journal of Machine Learning Research, 16(1), 77-102. 
 
 2. Chazal, F., Fasy, B. T., Lecci, F., Rinaldo, A., & Wasserman, L. (2014, June). Stochastic convergence of persistence landscapes and silhouettes. In Proceedings of the thirtieth annual symposium on Computational geometry (pp. 474-483).
+
+test test test
 }
 
 \examples{
@@ -45,5 +47,4 @@ computePL(D,homDim=0,k=1,scaleSeq)
 
 # compute persistence landscape (PL) for homological dimension H1 with order of landscape k=1
 computePL(D,homDim=1,k=1,scaleSeq)
-aesetredfgsd sd 
 }
