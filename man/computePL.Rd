@@ -9,18 +9,18 @@ computePL(D, homDim, k, scaleSeq)
 \arguments{
 \item{D}{N by 3 matrix (columns contain dimension, birth and death values respectively)}
 
-\item{homDim}{homological dimension (0 for H0, 1 for H1, etc.)}
+\item{homDim}{homological dimension (0 for H_0, 1 for H_1, etc.)}
 
 \item{k}{order of landscape function}
 
-\item{scaleSeq}{sequence of scale values for vectorization}
+\item{scaleSeq}{sequence of increasing scale values for vectorization}
 }
 \description{
 Vectorizes the persistence landscape function computed from a given persistence diagram.
 }
 
 \value{
-Returns a numeric vector where `i`-th element is the value of `k`-th landscape function at `scaleSeq[i]`. 
+A numeric vector where i-th element is the value of k-th order landscape function evaluated at \code{scaleSeq[i]}. 
 }
 
 \references{
@@ -30,10 +30,14 @@ Returns a numeric vector where `i`-th element is the value of `k`-th landscape f
 }
 
 \examples{
-N <- 100
+N <- 100 
 set.seed(123)
-X <- TDA::circleUnif(N) + rnorm(2*N,mean = 0,sd = 0.2)
+# sample N points uniformly from unit circle and add Gaussian noise
+X <- TDA::circleUnif(N,r=1) + rnorm(2*N,mean = 0,sd = 0.2)
+
+# compute a persistence diagram using the Rips filtration built on top of X
 D <- TDA::ripsDiag(X,maxdimension = 1,maxscale = 2)$diagram 
+
 scaleSeq = seq(0,2,length.out=11) # sequence of scale values
 
 # compute persistence landscape (PL) for homological dimension H0 with order of landscape k=1

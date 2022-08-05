@@ -79,7 +79,7 @@ computePL <- function(D, homDim, k, scaleSeq) {
 
 #' Calculates the Persistence Silhouettes
 #' 
-#' @param D N by 3 matrix (columns contain dimension, birth and persistence values respectively)
+#' @param D N by 3 matrix (columns contain dimension, birth and death values respectively)
 #' @param homDim homological dimension (0 for H0, 1 for H1, etc.)
 #' @param p power of the weights for the silhouette function
 #' @param scaleSeq sequence of scale values for vectorization
@@ -94,9 +94,9 @@ computePS <- function(D, homDim, p, scaleSeq) {
     .Call(`_TDAvec_computePS`, D, homDim, p, scaleSeq)
 }
 
-#' Vector Persistense Blocks
+#' Vector of Averaged Bettis
 #' 
-#' @param D N by 3 matrix (columns contain dimension, birth and persistence values respectively)
+#' @param D N by 3 matrix (columns contain dimension, birth and death values respectively)
 #' @param homDim homological dimension (0 for H0, 1 for H1, etc.)
 #' @param scaleSeq sequence of scale values for vectorization
 #' @examples
