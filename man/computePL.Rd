@@ -24,9 +24,9 @@ Returns a numeric vector where `i`-th element is the value of `k`-th landscape f
 }
 
 \references{
-1. Bubenik, P. (2015). Statistical topological data analysis using persistence landscapes. _Journal of Machine Learning Research_, 16(1), 77-102. 
+1. Bubenik, P. (2015). Statistical topological data analysis using persistence landscapes. Journal of Machine Learning Research, 16(1), 77-102. 
 
-2. Chazal, F., Fasy, B. T., Lecci, F., Rinaldo, A., & Wasserman, L. (2014, June). Stochastic convergence of persistence landscapes and silhouettes. In _Proceedings of the thirtieth annual symposium on Computational geometry_ (pp. 474-483).
+2. Chazal, F., Fasy, B. T., Lecci, F., Rinaldo, A., & Wasserman, L. (2014, June). Stochastic convergence of persistence landscapes and silhouettes. In Proceedings of the thirtieth annual symposium on Computational geometry (pp. 474-483).
 }
 
 \examples{
