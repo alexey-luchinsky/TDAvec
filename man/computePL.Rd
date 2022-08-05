@@ -38,9 +38,7 @@ scaleSeq = seq(0,2,length.out=11) # sequence of scale values
 
 # compute persistence landscape (PL) for homological dimension H0 with order of landscape k=1
 computePL(D,homDim=0,k=1,scaleSeq)
-computePLcpp(D,homDim=0,k=1,scaleSeq) # compare with C++ version
 
 # compute persistence landscape (PL) for homological dimension H1 with order of landscape k=1
 computePL(D,homDim=1,k=1,scaleSeq)
-computePLcpp(D,homDim=1,k=1,scaleSeq) # compare with C++ version
 }
