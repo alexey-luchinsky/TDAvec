@@ -2,12 +2,12 @@
 % Please edit documentation in R/RcppExports.R
 \name{computePL}
 \alias{computePL}
-\title{Calculates the Persistence Landscape}
+\title{A Vectory Summary of the Persistence Landscape Function}
 \usage{
 computePL(D, homDim, k, scaleSeq)
 }
 \arguments{
-\item{D}{N by 3 matrix (columns contain dimension, birth and persistence values respectively)}
+\item{D}{N by 3 matrix (columns contain dimension, birth and death values respectively)}
 
 \item{homDim}{homological dimension (0 for H0, 1 for H1, etc.)}
 
@@ -16,13 +16,31 @@ computePL(D, homDim, k, scaleSeq)
 \item{scaleSeq}{sequence of scale values for vectorization}
 }
 \description{
-Calculates the Persistence Landscape
+Vectorizes the persistence landscape function computed from a given persistence diagram.
 }
+
+\value{
+Returns a numeric vector where `i`-th element is the value of `k`-th landscape function at `scaleSeq[i]`. 
+}
+
+\references{
+1. Bubenik, P. (2015). Statistical topological data analysis using persistence landscapes. _Journal of Machine Learning Research_, 16(1), 77-102. 
+
+2. Chazal, F., Fasy, B. T., Lecci, F., Rinaldo, A., & Wasserman, L. (2014, June). Stochastic convergence of persistence landscapes and silhouettes. In _Proceedings of the thirtieth annual symposium on Computational geometry_ (pp. 474-483).
+}
+
 \examples{
 N <- 100
 set.seed(123)
 X <- TDA::circleUnif(N) + rnorm(2*N,mean = 0,sd = 0.2)
 D <- TDA::ripsDiag(X,maxdimension = 1,maxscale = 2)$diagram 
 scaleSeq = seq(0,2,length.out=11) # sequence of scale values
+
+# compute persistence landscape (PL) for homological dimension H0 with order of landscape k=1
 computePL(D,homDim=0,k=1,scaleSeq)
+computePLcpp(D,homDim=0,k=1,scaleSeq) # compare with C++ version
+
+# compute persistence landscape (PL) for homological dimension H1 with order of landscape k=1
+computePL(D,homDim=1,k=1,scaleSeq)
+computePLcpp(D,homDim=1,k=1,scaleSeq) # compare with C++ version
 }
