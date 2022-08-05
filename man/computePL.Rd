@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{computePL}
 \alias{computePL}
-\title{A Vectory Summary of the Persistence Landscape Function}
+\title{A Vector Summary of the Persistence Landscape Function}
 \usage{
 computePL(D, homDim, k, scaleSeq)
 }
