@@ -45,5 +45,5 @@ computePL(D,homDim=0,k=1,scaleSeq)
 
 # compute persistence landscape (PL) for homological dimension H1 with order of landscape k=1
 computePL(D,homDim=1,k=1,scaleSeq)
-aesetre
+aesetredfgsd sd 
 }
