@@ -10,3 +10,5 @@ src/*.dll
 TDAvec.Rproj
 src/RcppExports.cpp
 
+/doc/
+/Meta/
