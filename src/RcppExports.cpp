@@ -55,7 +55,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // computePL
-NumericVector computePL(NumericMatrix D, int homDim, int k, NumericVector scaleSeq);
+NumericVector computePL(NumericMatrix D, int homDim, NumericVector scaleSeq,int k);
 RcppExport SEXP _TDAvec_computePL(SEXP DSEXP, SEXP homDimSEXP, SEXP kSEXP, SEXP scaleSeqSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -64,12 +64,12 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type homDim(homDimSEXP);
     Rcpp::traits::input_parameter< int >::type k(kSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type scaleSeq(scaleSeqSEXP);
-    rcpp_result_gen = Rcpp::wrap(computePL(D, homDim, k, scaleSeq));
+    rcpp_result_gen = Rcpp::wrap(computePL(D, homDim, scaleSeq,k));
     return rcpp_result_gen;
 END_RCPP
 }
 // computePS
-NumericVector computePS(NumericMatrix D, int homDim, int p, NumericVector scaleSeq);
+NumericVector computePS(NumericMatrix D, int homDim, NumericVector scaleSeq,int p);
 RcppExport SEXP _TDAvec_computePS(SEXP DSEXP, SEXP homDimSEXP, SEXP pSEXP, SEXP scaleSeqSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -78,7 +78,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type homDim(homDimSEXP);
     Rcpp::traits::input_parameter< int >::type p(pSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type scaleSeq(scaleSeqSEXP);
-    rcpp_result_gen = Rcpp::wrap(computePS(D, homDim, p, scaleSeq));
+    rcpp_result_gen = Rcpp::wrap(computePS(D, homDim, scaleSeq, p));
     return rcpp_result_gen;
 END_RCPP
 }
