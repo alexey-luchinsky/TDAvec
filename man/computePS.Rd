@@ -19,8 +19,9 @@ where
 }
 
 \usage{
-computePS(D, homDim, scaleSeq, p)
+computePS(D, homDim, scaleSeq, p=1)
 }
+
 \arguments{
 \item{D}{N by 3 matrix (columns contain dimension, birth and death values respectively)}
 
