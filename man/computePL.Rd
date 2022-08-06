@@ -3,32 +3,45 @@
 \name{computePL}
 \alias{computePL}
 \title{A Vector Summary of the Persistence Landscape Function}
+
+\description{
+Vectorizes the persistence landscape function constructed from a given persistence diagram. The \eqn{k}th order landscape function of a persistence diagram \eqn{D} is defined as 
+\deqn{\lambda_k(t) = k\hbox{max}_{p\in D} \Lambda_p(t), \quad k\in\mathbb{N},}
+where \eqn{k\hbox{max}} returns the \eqn{k}th largest value and for \eqn{p=(b,d)\in D},
+\deqn{\Lambda_p(t) = \left\{
+        \begin{array}{ll}
+            t-b & \quad t\in [b,\frac{b+d}{2}] \\
+            d-t & \quad t\in (\frac{b+d}{2},d]\\
+            0 & \quad \hbox{otherwise}
+        \end{array}
+    \right.}
+}
+
 \usage{
-computePL(D, homDim, k, scaleSeq)
+computePL(D, homDim, scaleSeq, k=1)
 }
 \arguments{
 \item{D}{N by 3 matrix (columns contain dimension, birth and death values respectively)}
 
-\item{homDim}{homological dimension (0 for H_0, 1 for H_1, etc.)}
+\item{homDim}{homological dimension (0 for \eqn{H_0}, 1 for \eqn{H_1}, etc.)}
 
-\item{k}{order of landscape function}
+\item{scaleSeq}{sequence of increasing scale values used for vectorization}
 
-\item{scaleSeq}{sequence of increasing scale values for vectorization}
+\item{k}{order of landscape function. By default, \code{k=1}}
 }
-\description{
-Vectorizes the persistence landscape function computed from a given persistence diagram.
-}
+
 
 \value{
-A numeric vector where i-th element is the value of k-th order landscape function evaluated at \code{scaleSeq[i]}. 
+A numeric vector whose elements are the values of the \eqn{k}th order landscape function evaluated at each point of \code{scaleSeq}=\eqn{\{t_1,t_2,\ldots,t_n\}}:
+\deqn{(\lambda_k(t_1),\lambda_k(t_2),\ldots,\lambda_k(t_n))}
 }
+
+\author{Umar Islambekov}
 
 \references{
 1. Bubenik, P. (2015). Statistical topological data analysis using persistence landscapes. Journal of Machine Learning Research, 16(1), 77-102. 
 
 2. Chazal, F., Fasy, B. T., Lecci, F., Rinaldo, A., & Wasserman, L. (2014, June). Stochastic convergence of persistence landscapes and silhouettes. In Proceedings of the thirtieth annual symposium on Computational geometry (pp. 474-483).
-
-test test test
 }
 
 \examples{
@@ -42,9 +55,9 @@ D <- TDA::ripsDiag(X,maxdimension = 1,maxscale = 2)$diagram
 
 scaleSeq = seq(0,2,length.out=11) # sequence of scale values
 
-# compute persistence landscape (PL) for homological dimension H0 with order of landscape k=1
-computePL(D,homDim=0,k=1,scaleSeq)
+# compute persistence landscape (PL) for homological dimension H_0 with order of landscape k=1
+computePL(D,homDim=0,scaleSeq,k=1)
 
-# compute persistence landscape (PL) for homological dimension H1 with order of landscape k=1
-computePL(D,homDim=1,k=1,scaleSeq)
+# compute persistence landscape (PL) for homological dimension H_1 with order of landscape k=1
+computePL(D,homDim=1,scaleSeq,k=1)
 }
