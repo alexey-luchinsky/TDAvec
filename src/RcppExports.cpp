@@ -55,7 +55,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // computePL
-NumericVector computePL(NumericMatrix D, int homDim, NumericVector scaleSeq,int k);
+NumericVector computePL(NumericMatrix D, int homDim, NumericVector scaleSeq,int k=1);
 RcppExport SEXP _TDAvec_computePL(SEXP DSEXP, SEXP homDimSEXP, SEXP scaleSeqSEXP, SEXP kSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -69,7 +69,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // computePS
-NumericVector computePS(NumericMatrix D, int homDim, NumericVector scaleSeq,int p);
+NumericVector computePS(NumericMatrix D, int homDim, NumericVector scaleSeq,int p=1);
 RcppExport SEXP _TDAvec_computePS(SEXP DSEXP, SEXP homDimSEXP, SEXP scaleSeqSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
