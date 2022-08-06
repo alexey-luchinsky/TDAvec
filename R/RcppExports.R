@@ -74,7 +74,7 @@ computePI <- function(D, homDim, res, sigma, minB, maxB, minP, maxP) {
 #' computePL(D,homDim=0,k=1,scaleSeq)
 #' computePL(D,homDim=1,k=1,scaleSeq)
 computePL <- function(D, homDim,scaleSeq,k) {
-    .Call(`_TDAvec_computePL`, D, homDim, scaleSeq,k=1)
+    .Call(`_TDAvec_computePL`, D, homDim, scaleSeq,k)
 }
 
 #' Calculates the Persistence Silhouettes
@@ -91,7 +91,7 @@ computePL <- function(D, homDim,scaleSeq,k) {
 #' scaleSeq = seq(0,2,length.out=11) # sequence of scale values
 #' computePS(D,homDim=0,p=1,scaleSeq)
 computePS <- function(D, homDim, scaleSeq,p) {
-    .Call(`_TDAvec_computePS`, D, homDim, scaleSeq,p=1)
+    .Call(`_TDAvec_computePS`, D, homDim, scaleSeq,p)
 }
 
 #' Vector of Averaged Bettis
