@@ -69,8 +69,8 @@ Let's compute the _persistence landscape_ (PL) and _persistence silhouette_ (PS)
 # sequence of scale values to vectorize the summary function
 scaleSeq = seq(0,2,length.out=11) 
 # compute the PL and PS summaries for homological dimension H_0
-computePL(D,homDim = 0,k=1,scaleSeq)
-computePS(D,homDim = 0,p=1,scaleSeq)
+computePL(D,homDim = 0,scaleSeq,k=1)
+computePS(D,homDim = 0,scaleSeq,p=1)
 ```
 
 Here, the vectorization is performed by evaluating the respective summary function at each element of `scaleSeq` (i.e. $0.0,0.2,0.4,\ldots,2.0$) and arranging the values into a vector. 
@@ -81,8 +81,8 @@ To compute the summaries for homological dimension $H_1$, set the `homDim` argum
 
 ```{r}
 # compute the PL and PS summaries for homological dimension H_1
-computePL(D,homDim = 1,k=1,scaleSeq)
-computePS(D,homDim = 1,p=1,scaleSeq)
+computePL(D,homDim = 1,scaleSeq,k=1)
+computePS(D,homDim = 1,scaleSeq,p=1)
 ```
 
 The `TDA` package also provides implementations of the persistence landscapes and silhouettes. Below we compare the two implementations in terms of accuracy of results and run-time cost. 
@@ -120,13 +120,13 @@ print(costRatioPS)
 ```
 
 To discretize the _persistent entropy summary function_, _Euler characteristic curve_ and _Betti curve_, we employ a different vectorization scheme. Rather than evaluating a summary function at increasing scales and arranging the values into a vector, we compute the average values of the summary function between two
-consecutive scale points using integration. More specifically, if $f$ is a (univariate) summary function and $t_1,t_2,\ldots,t_d$ are increasing scale values, we discretize $f$ as:
+consecutive scale points using integration. More specifically, if $f$ is a (univariate) summary function and $t_1,t_2,\ldots,t_n$ are increasing scale values, we discretize $f$ as:
 
 \begin{equation}
-\Big(\frac{1}{\Delta t_1}\int_{t_1}^{t_2}f(t)dt,\frac{1}{\Delta t_2}\int_{t_2}^{t_3}f(t)dt,\ldots,\frac{1}{\Delta t_{d-1}}\int_{t_{d-1}}^{t_d}f(t)dt\Big)\in\mathbb{R}^{d-1},
+\Big(\frac{1}{\Delta t_1}\int_{t_1}^{t_2}f(t)dt,\frac{1}{\Delta t_2}\int_{t_2}^{t_3}f(t)dt,\ldots,\frac{1}{\Delta t_{n-1}}\int_{t_{n-1}}^{t_n}f(t)dt\Big)\in\mathbb{R}^{n-1},
 \end{equation}
 
-where $\Delta t_k=t_{k+1}-t_k$, $k=1,\ldots,d-1$. For the above three summary functions, the computation of integrals can be done analytically and efficiently implemented. For the Betti curve, we use the identity weight function (i.e., $w(b,d)\equiv 1$). If the weight function $w(b,d)=-(l/L)\log_2(l/L)$, where $l=d-b$ (life-span) and $L=\sum_{i=1}^n l_i$ (sum of all life-spans), the vector summary of the Betti curve will be the same as that of the persistent entropy summary function.
+where $\Delta t_k=t_{k+1}-t_k$, $k=1,\ldots,n-1$. For the above three summary functions, the computation of integrals can be done analytically and efficiently implemented. For the Betti curve, we use the identity weight function (i.e., $w(b,d)\equiv 1$). If the weight function $w(b,d)=-(l/L)\log_2(l/L)$, where $l=d-b$ (life-span) and $L=\sum_{i=1}^n l_i$ (sum of all life-spans), the vector summary of the Betti curve will be the same as that of the persistent entropy summary function.
 
 ```{r}
 # Persistent Entropy Summary (PES) function
@@ -153,14 +153,17 @@ colnames(D)[3] <- "Persistence"
 ```
 
 The resulting vector summaries are called the _persistence image_ (PI) and the _vectorized of persistence block_ (VPB) respectively. 
+
 ```{r}
 # Persistence Image (PI)
+res <- 5 # resolution or grid size
 # find min and max persistence values
 minPH0 <- min(D[D[,1]==0,3]); maxPH0 <- max(D[D[,1]==0,3])
-res <- 5 # resolution or grid size
 sigma <- 0.5*(maxPH0-minPH0)/res # default way of selecting the standard deviation sigma of the Gaussians on top of each point of the diagram
+# construct one-dimensional grid of scale values
+ySeq <- seq(minPH0,maxPH0,length.out=res+1)
 # compute PI for homological dimension H_0
-computePI(D,homDim=0,res,sigma,minB=NA,maxB=NA,minPH0,maxPH0)
+computePI(D,homDim=0,xSeq=NA,ySeq,res,sigma)
 
 # Vectorized Persistence Block (VPB)
 # construct one-dimensional grid of scale values
@@ -176,13 +179,15 @@ For homological dimension $H_1$, the birth values are not all the same and there
 
 ```{r}
 # PI
+res <- 5 # resolution or grid size
 # find min & max birth and persistence values
 minBH1 <- min(D[D[,1]==1,2]); maxBH1 <- max(D[D[,1]==1,2])
 minPH1 <- min(D[D[,1]==1,3]); maxPH1 <- max(D[D[,1]==1,3])
-res <- 5
+xSeq <- seq(minBH1,maxBH1,length.out=res+1)
+ySeq <- seq(minPH1,maxPH1,length.out=res+1)
 sigma <- 0.5*(maxPH1-minPH1)/res
 # compute PI for homological dimension H_1
-computePI(D,homDim=1,res,sigma,minBH1,maxBH1,minPH1,maxPH1)
+computePI(D,homDim=1,xSeq,ySeq,res,sigma)
 
 # VPB
 xSeqH1 <- unique(quantile(D[D[,1]==1,2],probs = seq(0,1,by=0.2)))
@@ -211,5 +216,5 @@ As a note, the code for `computePI()` is adopted from the `pers.image()` functio
 
 7. Adams, H., Emerson, T., Kirby, M., Neville, R., Peterson, C., Shipman, P., ... & Ziegelmeier, L. (2017). Persistence images: A stable vector representation of persistent homology. _Journal of Machine Learning Research_, 18.
 
-8. Chan, K. C., Islambekov, U., Luchinsky, A., & Sanders, R. (2021). A computationally efficient framework for vector representation of persistence diagrams. _Journal of Machine Learning Research_, 23, 1-33.
+8. Chan, K. C., Islambekov, U., Luchinsky, A., & Sanders, R. (2022). A computationally efficient framework for vector representation of persistence diagrams. _Journal of Machine Learning Research_, 23, 1-33.
 
