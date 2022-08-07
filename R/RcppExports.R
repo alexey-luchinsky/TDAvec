@@ -2,7 +2,9 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' computeECC
-#' 
+#' @param D N by 3 matrix (columns contain dimension, birth and death values respectively)
+#' @param maxhomDim maximum homological dimension considered (0 for H0, 1 for H1, etc.)
+#' @param scaleSeq sequence of scale values for vectorization
 #' @examples
 #' N <- 100
 #' set.seed(123)
@@ -15,7 +17,9 @@ computeECC <- function(D, maxhomDim, scaleSeq) {
 }
 
 #' computePES
-#'
+#' @param D N by 3 matrix (columns contain dimension, birth and death values respectively)
+#' @param homDim homological dimension (0 for H0, 1 for H1, etc.)
+#' @param scaleSeq sequence of scale values for vectorization
 #' @examples
 #' N <- 100
 #' set.seed(123)
@@ -32,12 +36,10 @@ computePES <- function(D, homDim, scaleSeq) {
 #' 
 #' @param D N by 3 matrix (columns contain dimension, birth and persistence values respectively)
 #' @param homDim homological dimension (0 for H0, 1 for H1, etc.)
+#' @param xSeq sequence of x (birth) values of the grid vertices
+#' @param ySeq sequence of y (persistence) values of the grid vertices
 #' @param res resolution parameter
 #' @param sigma sigma parameter
-#' @param minB minimal birth value
-#' @param maxB maximal birth value
-#' @param minP minimal persistance value
-#' @param maxP maxzimal persistance value
 #' @examples
 #' N <- 100
 #' set.seed(123)
