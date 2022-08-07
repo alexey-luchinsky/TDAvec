@@ -57,8 +57,8 @@ computePES <- function(D, homDim, scaleSeq) {
 #' minPH1 <- min(D[D[,1]==1,3]); maxPH1 <- max(D[D[,1]==1,3])
 #' sigma <- 0.5*(maxPH1-minPH1)/res # default way of selecting sigma - can be overridden 
 #' computePI(D,homDim=1,res,sigma,minBH1,maxBH1,minPH1,maxPH1)
-computePI <- function(D, homDim, res, sigma, minB, maxB, minP, maxP) {
-    .Call(`_TDAvec_computePI`, D, homDim, res, sigma, minB, maxB, minP, maxP)
+computePI <- function(D, homDim, xSeq, ySeq, res, sigma) {
+    .Call(`_TDAvec_computePI`, D, homDim, xSeq, ySeq, res, sigma)
 }
 
 #' A Vector Summary of the Persistence Landscape Function
