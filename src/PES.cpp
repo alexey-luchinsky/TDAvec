@@ -2,16 +2,6 @@
 #include <iostream>
 using namespace Rcpp;
 
-//' computePES
-//'
-//' @examples
-//' N <- 100
-//' set.seed(123)
-//' X <- TDA::circleUnif(N) + rnorm(2*N,mean = 0,sd = 0.2)  
-//' D <- TDA::ripsDiag(X,maxdimension = 1,maxscale = 2)$diagram  # compute PD using Rips filtration
-//' scaleSeq = seq(0,2,length.out=11) # sequence of scale values
-//' computePES(D,homDim = 0,scaleSeq) # compute PES for homological dimension H0
-//' computePES(D,homDim = 1,scaleSeq) # compute PES for homological dimension H1
 // [[Rcpp::export]]
 NumericVector computePES(NumericMatrix D, int homDim, NumericVector scaleSeq){
   int n_rows = 0; // number of rows with the correct dimension

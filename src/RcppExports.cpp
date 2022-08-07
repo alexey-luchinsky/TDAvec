@@ -37,20 +37,18 @@ BEGIN_RCPP
 END_RCPP
 }
 // computePI
-NumericVector computePI(NumericMatrix D, int homDim, int res, double sigma, double minB, double maxB, double minP, double maxP);
-RcppExport SEXP _TDAvec_computePI(SEXP DSEXP, SEXP homDimSEXP, SEXP resSEXP, SEXP sigmaSEXP, SEXP minBSEXP, SEXP maxBSEXP, SEXP minPSEXP, SEXP maxPSEXP) {
+NumericVector computePI(NumericMatrix D, int homDim, NumericVector xSeq, NumericVector ySeq, int res, double sigma);
+RcppExport SEXP _TDAvec_computePI(SEXP DSEXP, SEXP homDimSEXP, SEXP xSeqSEXP, SEXP ySeqSEXP,SEXP resSEXP, SEXP sigmaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type D(DSEXP);
     Rcpp::traits::input_parameter< int >::type homDim(homDimSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type xSeq(xSeqSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ySeq(ySeqSEXP);
     Rcpp::traits::input_parameter< int >::type res(resSEXP);
     Rcpp::traits::input_parameter< double >::type sigma(sigmaSEXP);
-    Rcpp::traits::input_parameter< double >::type minB(minBSEXP);
-    Rcpp::traits::input_parameter< double >::type maxB(maxBSEXP);
-    Rcpp::traits::input_parameter< double >::type minP(minPSEXP);
-    Rcpp::traits::input_parameter< double >::type maxP(maxPSEXP);
-    rcpp_result_gen = Rcpp::wrap(computePI(D, homDim, res, sigma, minB, maxB, minP, maxP));
+    rcpp_result_gen = Rcpp::wrap(computePI(D, homDim, xSeq,ySeq,res, sigma));
     return rcpp_result_gen;
 END_RCPP
 }
