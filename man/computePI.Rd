@@ -2,45 +2,78 @@
 % Please edit documentation in R/RcppExports.R
 \name{computePI}
 \alias{computePI}
-\title{Calculates the Persistence Image}
-\usage{
-computePI(D, homDim, res, sigma, minB, maxB, minP, maxP)
-}
-\arguments{
-\item{D}{N by 3 matrix (columns contain dimension, birth and persistence values respectively)}
+\title{A Vector Summary of the Persistence Surface}
 
-\item{homDim}{homological dimension (0 for H0, 1 for H1, etc.)}
-
-\item{res}{resolution parameter}
-
-\item{sigma}{sigma parameter}
-
-\item{minB}{minimal birth value}
-
-\item{maxB}{maximal birth value}
-
-\item{minP}{minimal persistance value}
-
-\item{maxP}{maxzimal persistance value}
-}
 \description{
-Calculates the Persistence Image
+For a given persistence diagram \eqn{D=\{(b_i,p_i)\}_{i=1}^N}, \code{computePI()} computes the persistence image (PI) - a vector summary of the persistence surface \deqn{\rho(x,y)=\sum_{i=1}^N f(b_i,p_i)\phi_{(b_i,p_i)}(x,y),} where \eqn{\phi_{(b_i,p_i)}(x,y)} is 
+the Gaussian distribution with mean \eqn{(b_i,p_i)} and 
+covariance matrix \eqn{\sigma^2 I_{2\times 2}} and 
+\deqn{f(b,p) = w(p)=\left\{
+        \begin{array}{ll}
+            0 & \quad y\leq 0 \\
+            p/p_{max} & \quad 0<p<p_{max}\\
+            1& \quad y\geq p_{max}
+        \end{array}
+    \right.}
+is the weighting function with \eqn{p_{max}} being the maximum persistence value among all persistence diagrams considered in the experiment
 }
+
+\usage{
+computePI(D, homDim, xSeq, ySeq, res, sigma)
+}
+
+\arguments{
+\item{D}{matrix with three columns containing the dimension, birth and persistence values respectively}
+
+\item{homDim}{homological dimension (0 for \eqn{H_0}, 1 for \eqn{H_1}, etc.)}
+
+\item{xSeq}{numeric vector of increasing x (birth) values used for vectorization}
+
+\item{ySeq}{numeric vector of increasing y (persistence) values used for vectorization}
+
+\item{res}{resolution parameter (or grid size). For example, if \code{res=10} and the birth values are not all equal, a \eqn{10\times 10} grid is constructed for vectorization}
+
+\item{sigma}{standard deviation of the Gaussian}
+}
+
+\value{
+A numeric vector whose elements are the average values of the persistence surface computed over each cell of the two-dimensional grid constructred from \code{xSeq}=\eqn{\{x_1,x_2,\ldots,x_n\}} and \code{ySeq}=\eqn{\{y_1,y_2,\ldots,y_m\}}:
+
+\deqn{(\frac{1}{\Delta x_1\Delta y_1}\int_{[x_1,x_2]\times [y_1,y_2]}\rho(x,y)dA,\ldots,\frac{1}{\Delta x_{n-1}\Delta y_{m-1}}\int_{[x_{n-1},x_n]\times [y_{m-1},y_m]}\rho(x,y)dA),}
+where \eqn{dA=dxdy}, \eqn{\Delta x_k=x_{k+1}-x_k} and \eqn{\Delta y_j=y_{j+1}-y_j}
+}
+
+\author{Umar Islambekov}
+
+\references{
+1. Adams, H., Emerson, T., Kirby, M., Neville, R., Peterson, C., Shipman, P., ... & Ziegelmeier, L. (2017). Persistence images: A stable vector representation of persistent homology. Journal of Machine Learning Research, 18.
+}
+
+
 \examples{
-N <- 100
+N <- 100 
 set.seed(123)
-X <- TDA::circleUnif(N) + rnorm(2*N,mean = 0,sd = 0.2)  
+# sample N points uniformly from unit circle and add Gaussian noise
+X <- TDA::circleUnif(N,r=1) + rnorm(2*N,mean = 0,sd = 0.2)
+
+# compute a persistence diagram using the Rips filtration built on top of X
 D <- TDA::ripsDiag(X,maxdimension = 1,maxscale = 2)$diagram 
+
+# switch from the birth-death to the birth-persistence coordinates
 D[,3] <- D[,3] - D[,2] 
 colnames(D)[3] <- "Persistence"
-res <- 5 # resolution or grid size
   
+# compute PI for homological dimension H_0
 minPH0 <- min(D[D[,1]==0,3]); maxPH0 <- max(D[D[,1]==0,3])
-sigma <- 0.5*(maxPH0-minPH0)/res
-computePI(D,homDim=0,res,sigma,minB=NA,maxB=NA,minPH0,maxPH0)
+ySeq <- seq(minPH0,maxPH0,length.out=res+1)
+sigma <- 0.5*(maxPH0-minPH0)/res # default way of selecting sigma - can be overridden 
+computePI(D,homDim=0,xSeq=NA,ySeq,res,sigma) 
     
+# compute PI for homological dimension H_1
 minBH1 <- min(D[D[,1]==1,2]); maxBH1 <- max(D[D[,1]==1,2])
 minPH1 <- min(D[D[,1]==1,3]); maxPH1 <- max(D[D[,1]==1,3])
+xSeq <- seq(minBH1,maxBH1,length.out=res+1)
+ySeq <- seq(minPH1,maxPH1,length.out=res+1)
 sigma <- 0.5*(maxPH1-minPH1)/res # default way of selecting sigma - can be overridden 
-computePI(D,homDim=1,res,sigma,minBH1,maxBH1,minPH1,maxPH1)
+computePI(D,homDim=1,xSeq,ySeq,res,sigma) 
 }

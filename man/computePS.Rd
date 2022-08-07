@@ -5,7 +5,7 @@
 \title{A Vector Summary of the Persistence Silhouette Function}
 
 \description{
-Vectorizes the persistence silhouette function constructed from a given persistence diagram. The \eqn{p}th power silhouette function of a persistence diagram \eqn{D=\{(b_i,d_i)\}_{i=1}^N} is defined as 
+Vectorizes the persistence silhouette (PS) function constructed from a given persistence diagram. The \eqn{p}th power silhouette function of a persistence diagram \eqn{D=\{(b_i,d_i)\}_{i=1}^N} is defined as 
 \deqn{\phi_p(t) = \frac{\sum_{i=1}^N |d_i-b_i|^p\Lambda_i(t)}{\sum_{i=1}^N |d_i-b_i|^p},}
 where
 \deqn{\Lambda_i(t) = \left\{
@@ -16,18 +16,17 @@ where
         \end{array}
     \right.}
 }
-}
 
 \usage{
 computePS(D, homDim, scaleSeq, p=1)
 }
 
 \arguments{
-\item{D}{N by 3 matrix (columns contain dimension, birth and death values respectively)}
+\item{D}{matrix with three columns containing the dimension, birth and death values respectively}
 
 \item{homDim}{homological dimension (0 for \eqn{H_0}, 1 for \eqn{H_1}, etc.)}
 
-\item{scaleSeq}{sequence of increasing scale values used for vectorization}
+\item{scaleSeq}{numeric vector of increasing scale values used for vectorization}
 
 \item{p}{power of the weights for the silhouette function. By default, \code{p=1}}
 }

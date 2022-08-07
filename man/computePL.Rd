@@ -5,13 +5,13 @@
 \title{A Vector Summary of the Persistence Landscape Function}
 
 \description{
-Vectorizes the persistence landscape function constructed from a given persistence diagram. The \eqn{k}th order landscape function of a persistence diagram \eqn{D} is defined as 
-\deqn{\lambda_k(t) = k\hbox{max}_{p\in D} \Lambda_p(t), \quad k\in\mathbb{N},}
-where \eqn{k\hbox{max}} returns the \eqn{k}th largest value and for \eqn{p=(b,d)\in D},
-\deqn{\Lambda_p(t) = \left\{
+Vectorizes the persistence landscape (PL) function constructed from a given persistence diagram. The \eqn{k}th order landscape function of a persistence diagram \eqn{D=\{(b_i,d_i)\}_{i=1}^N} is defined as 
+\deqn{\lambda_k(t) = k\hbox{max}_{1\leq i \leq N} \Lambda_i(t), \quad k\in\mathbb{N},}
+where \eqn{k\hbox{max}} returns the \eqn{k}th largest value and 
+\deqn{\Lambda_i(t) = \left\{
         \begin{array}{ll}
-            t-b & \quad t\in [b,\frac{b+d}{2}] \\
-            d-t & \quad t\in (\frac{b+d}{2},d]\\
+            t-b_i & \quad t\in [b_i,\frac{b_i+d_i}{2}] \\
+            d_i-t & \quad t\in (\frac{b_i+d_i}{2},d_i]\\
             0 & \quad \hbox{otherwise}
         \end{array}
     \right.}
@@ -21,11 +21,11 @@ where \eqn{k\hbox{max}} returns the \eqn{k}th largest value and for \eqn{p=(b,d)
 computePL(D, homDim, scaleSeq, k=1)
 }
 \arguments{
-\item{D}{N by 3 matrix (columns contain dimension, birth and death values respectively)}
+\item{D}{matrix with three columns containing the dimension, birth and death values respectively}
 
 \item{homDim}{homological dimension (0 for \eqn{H_0}, 1 for \eqn{H_1}, etc.)}
 
-\item{scaleSeq}{sequence of increasing scale values used for vectorization}
+\item{scaleSeq}{numeric vector of increasing scale values used for vectorization}
 
 \item{k}{order of landscape function. By default, \code{k=1}}
 }
