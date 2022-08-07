@@ -62,6 +62,8 @@ D <- TDA::ripsDiag(X,maxdimension = 1,maxscale = 2)$diagram
 # switch from the birth-death to the birth-persistence coordinates
 D[,3] <- D[,3] - D[,2] 
 colnames(D)[3] <- "Persistence"
+
+res <- 5 # resolution or grid size
   
 # compute PI for homological dimension H_0
 minPH0 <- min(D[D[,1]==0,3]); maxPH0 <- max(D[D[,1]==0,3])
