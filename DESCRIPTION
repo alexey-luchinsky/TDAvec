@@ -4,7 +4,7 @@ Title: Vector Summaries of Persistence Diagrams
 Version: 0.1.0
 Author: Umar Islambekov, Alexey Luchinsky
 Maintainer: Alexey Luchinsky <aluchi@bgsu.edu>
-Description: Tools for computing various vector summaries of persistence diagrams studied in Topological Data Analysis. 
+Description: Tools for computing various vector summaries of persistence diagrams studied in Topological Data Analysis. For improved computational efficiency, all code for the vector summaries is written in C++ using the Rcpp package.
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
