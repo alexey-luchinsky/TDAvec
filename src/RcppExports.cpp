@@ -38,7 +38,7 @@ END_RCPP
 }
 // computePI
 NumericVector computePI(NumericMatrix D, int homDim, NumericVector xSeq, NumericVector ySeq, int res, double sigma);
-RcppExport SEXP _TDAvec_computePI(SEXP DSEXP, SEXP homDimSEXP, SEXP xSeqSEXP, SEXP ySeqSEXP,SEXP resSEXP, SEXP sigmaSEXP) {
+RcppExport SEXP _TDAvec_computePI(SEXP DSEXP, SEXP homDimSEXP, SEXP xSeqSEXP, SEXP ySeqSEXP, SEXP resSEXP, SEXP sigmaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -48,12 +48,12 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type ySeq(ySeqSEXP);
     Rcpp::traits::input_parameter< int >::type res(resSEXP);
     Rcpp::traits::input_parameter< double >::type sigma(sigmaSEXP);
-    rcpp_result_gen = Rcpp::wrap(computePI(D, homDim, xSeq,ySeq,res, sigma));
+    rcpp_result_gen = Rcpp::wrap(computePI(D, homDim, xSeq, ySeq, res, sigma));
     return rcpp_result_gen;
 END_RCPP
 }
 // computePL
-NumericVector computePL(NumericMatrix D, int homDim, NumericVector scaleSeq,int k);
+NumericVector computePL(NumericMatrix D, int homDim, NumericVector scaleSeq, int k);
 RcppExport SEXP _TDAvec_computePL(SEXP DSEXP, SEXP homDimSEXP, SEXP scaleSeqSEXP, SEXP kSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -62,12 +62,12 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type homDim(homDimSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type scaleSeq(scaleSeqSEXP);
     Rcpp::traits::input_parameter< int >::type k(kSEXP);
-    rcpp_result_gen = Rcpp::wrap(computePL(D, homDim, scaleSeq,k));
+    rcpp_result_gen = Rcpp::wrap(computePL(D, homDim, scaleSeq, k));
     return rcpp_result_gen;
 END_RCPP
 }
 // computePS
-NumericVector computePS(NumericMatrix D, int homDim, NumericVector scaleSeq,int p);
+NumericVector computePS(NumericMatrix D, int homDim, NumericVector scaleSeq, int p);
 RcppExport SEXP _TDAvec_computePS(SEXP DSEXP, SEXP homDimSEXP, SEXP scaleSeqSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -112,7 +112,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_TDAvec_computeECC", (DL_FUNC) &_TDAvec_computeECC, 3},
     {"_TDAvec_computePES", (DL_FUNC) &_TDAvec_computePES, 3},
-    {"_TDAvec_computePI", (DL_FUNC) &_TDAvec_computePI, 8},
+    {"_TDAvec_computePI", (DL_FUNC) &_TDAvec_computePI, 6},
     {"_TDAvec_computePL", (DL_FUNC) &_TDAvec_computePL, 4},
     {"_TDAvec_computePS", (DL_FUNC) &_TDAvec_computePS, 4},
     {"_TDAvec_computeVAB", (DL_FUNC) &_TDAvec_computeVAB, 3},
