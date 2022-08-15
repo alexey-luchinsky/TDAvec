@@ -5,7 +5,7 @@
 \title{A Vector Summary of the Persistent Entropy Summary Function}
 
 \description{
-For a given persistence diagram \eqn{D=\{(b_i,d_i)\}_{i=1}^N}, \code{computePES()} vectorizes the persistent entropy summary (PES) function \deqn{S(t)=-\sum_{i=1}^N \frac{l_i}{L}\log_2{(\frac{l_i}{L}})\mathbb{1}_{[b_i,d_i]}(t),} where \eqn{l_i=d_i-b_i} and \eqn{L=\sum_{i=1}^Nl_i}
+For a given persistence diagram \eqn{D=\{(b_i,d_i)\}_{i=1}^N}, \code{computePES()} vectorizes the persistent entropy summary (PES) function \deqn{S(t)=-\sum_{i=1}^N \frac{l_i}{L}\log_2{(\frac{l_i}{L}})\mathbb{1}_{[b_i,d_i]}(t),} where \eqn{l_i=d_i-b_i} and \eqn{L=\sum_{i=1}^Nl_i}. Points of \eqn{D} with infinite death value are ignored
 }
 
 \usage{

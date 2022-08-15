@@ -5,7 +5,7 @@
 \title{A Vector Summary of the Persistence Block}
 
 \description{
-For a given persistence diagram \eqn{D=\{(b_i,p_i)\}_{i=1}^N}, \code{computeVPB()} vectorizes the persistence block \deqn{f(x,y)=\sum_{i=1}^N \mathbb{1}_{E(b_i,p_i)}(x,y),} where \eqn{E(b_i,p_i)=[b_i-\frac{\lambda_i}{2},b_i+\frac{\lambda_i}{2}]\times [p_i-\frac{\lambda_i}{2},p_i+\frac{\lambda_i}{2}]} with \eqn{\tau\in (0,1]} and \eqn{\lambda_i=2\tau p_i}
+For a given persistence diagram \eqn{D=\{(b_i,p_i)\}_{i=1}^N}, \code{computeVPB()} vectorizes the persistence block \deqn{f(x,y)=\sum_{i=1}^N \mathbb{1}_{E(b_i,p_i)}(x,y),} where \eqn{E(b_i,p_i)=[b_i-\frac{\lambda_i}{2},b_i+\frac{\lambda_i}{2}]\times [p_i-\frac{\lambda_i}{2},p_i+\frac{\lambda_i}{2}]} and \eqn{\lambda_i=2\tau p_i} with \eqn{\tau\in (0,1]}. Points of \eqn{D} with infinite persistence value are ignored
 }
 
 \usage{
@@ -49,13 +49,14 @@ D <- TDA::ripsDiag(X,maxdimension = 1,maxscale = 2)$diagram
 D[,3] <- D[,3] - D[,2] 
 colnames(D)[3] <- "Persistence"
 
-# construct sequences of birth and persistence values
-xSeq <- unique(quantile(D[D[,1]==1,2],probs = seq(0,1,by=0.1)))
-ySeq <- unique(quantile(D[D[,1]==1,3],probs = seq(0,1,by=0.1)))
-
+# construct one-dimensional grid of scale values
+ySeqH0 <- unique(quantile(D[D[,1]==0,3],probs = seq(0,1,by=0.2))) 
+tau <- 0.3 # parameter in [0,1] which controls the size of blocks around each point of the diagram 
 # compute VPB for homological dimension H_0
-computeVPB(D,homDim = 0,xSeq,ySeq,tau = 0.3)
+computeVPB(D,homDim = 0,xSeq=NA,ySeqH0,tau)
 
+xSeqH1 <- unique(quantile(D[D[,1]==1,2],probs = seq(0,1,by=0.2)))
+ySeqH1 <- unique(quantile(D[D[,1]==1,3],probs = seq(0,1,by=0.2)))
 # compute VPB for homological dimension H_1
-computeVPB(D,homDim = 1,xSeq,ySeq,tau = 0.3)
+computeVPB(D,homDim = 1,xSeqH1,ySeqH1,tau) 
 }

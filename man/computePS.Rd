@@ -15,6 +15,7 @@ where
             0 & \quad \hbox{otherwise}
         \end{array}
     \right.}
+Points of \eqn{D} with infinite death value are ignored
 }
 
 \usage{

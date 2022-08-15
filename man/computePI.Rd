@@ -5,7 +5,7 @@
 \title{A Vector Summary of the Persistence Surface}
 
 \description{
-For a given persistence diagram \eqn{D=\{(b_i,p_i)\}_{i=1}^N}, \code{computePI()} computes the persistence image (PI) - a vector summary of the persistence surface \deqn{\rho(x,y)=\sum_{i=1}^N f(b_i,p_i)\phi_{(b_i,p_i)}(x,y),} where \eqn{\phi_{(b_i,p_i)}(x,y)} is 
+For a given persistence diagram \eqn{D=\{(b_i,p_i)\}_{i=1}^N}, \code{computePI()} computes the persistence image (PI) - a vector summary of the persistence surface: \deqn{\rho(x,y)=\sum_{i=1}^N f(b_i,p_i)\phi_{(b_i,p_i)}(x,y),} where \eqn{\phi_{(b_i,p_i)}(x,y)} is 
 the Gaussian distribution with mean \eqn{(b_i,p_i)} and 
 covariance matrix \eqn{\sigma^2 I_{2\times 2}} and 
 \deqn{f(b,p) = w(p)=\left\{
@@ -15,7 +15,7 @@ covariance matrix \eqn{\sigma^2 I_{2\times 2}} and
             1& \quad y\geq p_{max}
         \end{array}
     \right.}
-is the weighting function with \eqn{p_{max}} being the maximum persistence value among all persistence diagrams considered in the experiment
+is the weighting function with \eqn{p_{max}} being the maximum persistence value among all persistence diagrams considered in the experiment. Points of \eqn{D} with infinite persistence value are ignored
 }
 
 \usage{
@@ -67,15 +67,15 @@ res <- 5 # resolution or grid size
   
 # compute PI for homological dimension H_0
 minPH0 <- min(D[D[,1]==0,3]); maxPH0 <- max(D[D[,1]==0,3])
-ySeq <- seq(minPH0,maxPH0,length.out=res+1)
-sigma <- 0.5*(maxPH0-minPH0)/res # default way of selecting sigma - can be overridden 
-computePI(D,homDim=0,xSeq=NA,ySeq,res,sigma) 
+ySeqH0 <- seq(minPH0,maxPH0,length.out=res+1)
+sigma <- 0.5*(maxPH0-minPH0)/res 
+computePI(D,homDim=0,xSeq=NA,ySeqH0,res,sigma) 
     
 # compute PI for homological dimension H_1
 minBH1 <- min(D[D[,1]==1,2]); maxBH1 <- max(D[D[,1]==1,2])
 minPH1 <- min(D[D[,1]==1,3]); maxPH1 <- max(D[D[,1]==1,3])
-xSeq <- seq(minBH1,maxBH1,length.out=res+1)
-ySeq <- seq(minPH1,maxPH1,length.out=res+1)
-sigma <- 0.5*(maxPH1-minPH1)/res # default way of selecting sigma - can be overridden 
-computePI(D,homDim=1,xSeq,ySeq,res,sigma) 
+xSeqH1 <- seq(minBH1,maxBH1,length.out=res+1)
+ySeqH1 <- seq(minPH1,maxPH1,length.out=res+1)
+sigma <- 0.5*(maxPH1-minPH1)/res 
+computePI(D,homDim=1,xSeqH1,ySeqH1,res,sigma) 
 }
