@@ -17,7 +17,7 @@ NumericVector computePL(NumericMatrix D, int homDim, NumericVector scaleSeq,int 
   NumericVector x(n_rows),y(n_rows);
   int n=0;
   for(int i=0;i<D.nrow();++i){
-    if( D(i,0) == homDim){
+    if(D(i,0) == homDim){
       x[n] = D(i,1);
       y[n] = D(i,2);
       ++n;
