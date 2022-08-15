@@ -2,7 +2,9 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' computeECC
-#' 
+#' @param D N by 3 matrix (columns contain dimension, birth and death values respectively)
+#' @param maxhomDim maximum homological dimension considered (0 for H0, 1 for H1, etc.)
+#' @param scaleSeq sequence of scale values for vectorization
 #' @examples
 #' N <- 100
 #' set.seed(123)
@@ -15,7 +17,9 @@ computeECC <- function(D, maxhomDim, scaleSeq) {
 }
 
 #' computePES
-#'
+#' @param D N by 3 matrix (columns contain dimension, birth and death values respectively)
+#' @param homDim homological dimension (0 for H0, 1 for H1, etc.)
+#' @param scaleSeq sequence of scale values for vectorization
 #' @examples
 #' N <- 100
 #' set.seed(123)
@@ -32,12 +36,10 @@ computePES <- function(D, homDim, scaleSeq) {
 #' 
 #' @param D N by 3 matrix (columns contain dimension, birth and persistence values respectively)
 #' @param homDim homological dimension (0 for H0, 1 for H1, etc.)
+#' @param xSeq sequence of x (birth) values of the grid vertices
+#' @param ySeq sequence of y (persistence) values of the grid vertices
 #' @param res resolution parameter
 #' @param sigma sigma parameter
-#' @param minB minimal birth value
-#' @param maxB maximal birth value
-#' @param minP minimal persistance value
-#' @param maxP maxzimal persistance value
 #' @examples
 #' N <- 100
 #' set.seed(123)
@@ -55,20 +57,39 @@ computePES <- function(D, homDim, scaleSeq) {
 #' minPH1 <- min(D[D[,1]==1,3]); maxPH1 <- max(D[D[,1]==1,3])
 #' sigma <- 0.5*(maxPH1-minPH1)/res # default way of selecting sigma - can be overridden 
 #' computePI(D,homDim=1,res,sigma,minBH1,maxBH1,minPH1,maxPH1)
-computePI <- function(D, homDim, res, sigma, minB, maxB, minP, maxP) {
-    .Call(`_TDAvec_computePI`, D, homDim, res, sigma, minB, maxB, minP, maxP)
+computePI <- function(D, homDim, xSeq, ySeq, res, sigma) {
+    .Call(`_TDAvec_computePI`, D, homDim, xSeq, ySeq, res, sigma)
 }
 
+<<<<<<< HEAD
 computePL <- function(D, homDim, k, scaleSeq) {
     .Call(`_TDAvec_computePL`, D, homDim, k, scaleSeq)
+=======
+#' A Vector Summary of the Persistence Landscape Function
+#' 
+#' @param D N by 3 matrix (columns contain dimension, birth and death values respectively)
+#' @param homDim homological dimension (0 for H0, 1 for H1, etc.)
+#' @param scaleSeq sequence of scale values for vectorization
+#' @param k order of landscape function
+#' @examples
+#' N <- 100
+#' set.seed(123)
+#' X <- TDA::circleUnif(N) + rnorm(2*N,mean = 0,sd = 0.2)
+#' D <- TDA::ripsDiag(X,maxdimension = 1,maxscale = 2)$diagram 
+#' scaleSeq = seq(0,2,length.out=11) # sequence of scale values
+#' computePL(D,homDim=0,k=1,scaleSeq)
+#' computePL(D,homDim=1,k=1,scaleSeq)
+computePL <- function(D, homDim,scaleSeq,k=1) {
+    .Call(`_TDAvec_computePL`, D, homDim, scaleSeq,k)
+>>>>>>> ea08def215c4300f325a89b547dc35428aae2c8e
 }
 
 #' Calculates the Persistence Silhouettes
 #' 
 #' @param D N by 3 matrix (columns contain dimension, birth and persistence values respectively)
 #' @param homDim homological dimension (0 for H0, 1 for H1, etc.)
-#' @param p power of the weights for the silhouette function
 #' @param scaleSeq sequence of scale values for vectorization
+#' @param p power of the weights for the silhouette function
 #' @examples
 #' N <- 100
 #' set.seed(123)
@@ -76,8 +97,8 @@ computePL <- function(D, homDim, k, scaleSeq) {
 #' D <- TDA::ripsDiag(X,maxdimension = 1,maxscale = 2)$diagram 
 #' scaleSeq = seq(0,2,length.out=11) # sequence of scale values
 #' computePS(D,homDim=0,p=1,scaleSeq)
-computePS <- function(D, homDim, p, scaleSeq) {
-    .Call(`_TDAvec_computePS`, D, homDim, p, scaleSeq)
+computePS <- function(D, homDim, scaleSeq,p=1) {
+    .Call(`_TDAvec_computePS`, D, homDim, scaleSeq,p)
 }
 
 #' Vector Persistense Blocks

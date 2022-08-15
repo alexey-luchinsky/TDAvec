@@ -12,14 +12,6 @@ NumericVector seq_C(double a, double b, double by){
   return out;
 }
 
-NumericVector rowSums_C(NumericMatrix D) {
-  NumericVector out(D.nrow());
-  for ( int i = 0; i < D.nrow(); ++i ) {
-    out[i] = sum(D(i,_));
-  }
-  return out;
-}
-
 NumericVector outer_C(NumericVector x, NumericVector y) {
   int n = x.length();
   int m = y.length();
@@ -60,42 +52,14 @@ NumericVector PSurfaceHk(NumericVector point,
   return wgt*outer_C(out1,out2); 
 }
 
-//' Calculates the Persistence Image
-//' 
-//' @param D N by 3 matrix (columns contain dimension, birth and persistence values respectively)
-//' @param homDim homological dimension (0 for H0, 1 for H1, etc.)
-//' @param res resolution parameter
-//' @param sigma sigma parameter
-//' @param minB minimal birth value
-//' @param maxB maximal birth value
-//' @param minP minimal persistance value
-//' @param maxP maxzimal persistance value
-//' @examples
-//' N <- 100
-//' set.seed(123)
-//' X <- TDA::circleUnif(N) + rnorm(2*N,mean = 0,sd = 0.2)  
-//' D <- TDA::ripsDiag(X,maxdimension = 1,maxscale = 2)$diagram 
-//' D[,3] <- D[,3] - D[,2] 
-//' colnames(D)[3] <- "Persistence"
-//' res <- 5 # resolution or grid size
-//'   
-//' minPH0 <- min(D[D[,1]==0,3]); maxPH0 <- max(D[D[,1]==0,3])
-//' sigma <- 0.5*(maxPH0-minPH0)/res
-//' computePI(D,homDim=0,res,sigma,minB=NA,maxB=NA,minPH0,maxPH0)
-//'     
-//' minBH1 <- min(D[D[,1]==1,2]); maxBH1 <- max(D[D[,1]==1,2])
-//' minPH1 <- min(D[D[,1]==1,3]); maxPH1 <- max(D[D[,1]==1,3])
-//' sigma <- 0.5*(maxPH1-minPH1)/res # default way of selecting sigma - can be overridden 
-//' computePI(D,homDim=1,res,sigma,minBH1,maxBH1,minPH1,maxPH1)
 // [[Rcpp::export]]
 NumericVector computePI(NumericMatrix D,int homDim,
-                           int res, double sigma,
-                           double minB, double maxB,
-                           double minP, double maxP){
+                        NumericVector xSeq, NumericVector ySeq,
+                        int res, double sigma){
 // D - N by 3 matrix (columns contain dimension, birth and persistence values respectively)
 int n_rows = 0; // number of rows with the correct dimension
   for(int i=0; i<D.nrow(); ++i) {
-    if(D(i,0) == homDim) {
+    if((D(i,0) == homDim)&(Rcpp::traits::is_finite<REALSXP>(D(i,2)))){
       ++n_rows; 
     }
   }
@@ -105,13 +69,15 @@ if (n_rows == 0) return NumericVector(pow(res,2));
 NumericMatrix D_(n_rows,2);
 int j=0;
 for(int i=0; i<D.nrow(); ++i) {
-  if(D(i,0) == homDim) {
+  if((D(i,0) == homDim)&(Rcpp::traits::is_finite<REALSXP>(D(i,2)))){
     D_(j,0) = D(i,1);
     D_(j,1) = D(i,2);
     ++j;
   }
 }
 
+double minP = ySeq[0];
+double maxP = ySeq[ySeq.size()-1];
 double dy = (maxP-minP)/res;
 NumericVector y_lower = seq_C(minP,maxP-dy,dy);
 NumericVector y_upper = y_lower + dy;
@@ -130,6 +96,8 @@ if (Nsize==res) {
   }
 
 } else{
+  double minB = xSeq[0];
+  double maxB = xSeq[xSeq.size()-1];
   double dx = (maxB-minB)/res;
   NumericVector x_lower = seq_C(minB,maxB-dx,dx);
   NumericVector x_upper = x_lower + dx;
@@ -137,6 +105,6 @@ if (Nsize==res) {
     Psurf_mat(_,i) = PSurfaceHk(D_(i,_),y_lower,y_upper,x_lower,x_upper,sigma,maxP);
   }
 }
-NumericVector out = rowSums_C(Psurf_mat);
+NumericVector out = rowSums(Psurf_mat);
 return out;
 }

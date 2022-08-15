@@ -2,27 +2,61 @@
 % Please edit documentation in R/RcppExports.R
 \name{computePS}
 \alias{computePS}
-\title{Calculates the Persistence Silhouettes}
-\usage{
-computePS(D, homDim, p, scaleSeq)
-}
-\arguments{
-\item{D}{N by 3 matrix (columns contain dimension, birth and persistence values respectively)}
+\title{A Vector Summary of the Persistence Silhouette Function}
 
-\item{homDim}{homological dimension (0 for H0, 1 for H1, etc.)}
-
-\item{p}{power of the weights for the silhouette function}
-
-\item{scaleSeq}{sequence of scale values for vectorization}
-}
 \description{
-Calculates the Persistence Silhouettes
+Vectorizes the persistence silhouette (PS) function constructed from a given persistence diagram. The \eqn{p}th power silhouette function of a persistence diagram \eqn{D=\{(b_i,d_i)\}_{i=1}^N} is defined as 
+\deqn{\phi_p(t) = \frac{\sum_{i=1}^N |d_i-b_i|^p\Lambda_i(t)}{\sum_{i=1}^N |d_i-b_i|^p},}
+where
+\deqn{\Lambda_i(t) = \left\{
+        \begin{array}{ll}
+            t-b_i & \quad t\in [b_i,\frac{b_i+d_i}{2}] \\
+            d_i-t & \quad t\in (\frac{b_i+d_i}{2},d_i]\\
+            0 & \quad \hbox{otherwise}
+        \end{array}
+    \right.}
+Points of \eqn{D} with infinite death value are ignored
 }
+
+\usage{
+computePS(D, homDim, scaleSeq, p=1)
+}
+
+\arguments{
+\item{D}{matrix with three columns containing the dimension, birth and death values respectively}
+
+\item{homDim}{homological dimension (0 for \eqn{H_0}, 1 for \eqn{H_1}, etc.)}
+
+\item{scaleSeq}{numeric vector of increasing scale values used for vectorization}
+
+\item{p}{power of the weights for the silhouette function. By default, \code{p=1}}
+}
+
+\value{
+A numeric vector whose elements are the values of the \eqn{p}th power silhouette function evaluated at each point of \code{scaleSeq}=\eqn{\{t_1,t_2,\ldots,t_n\}}:
+\deqn{(\phi_p(t_1),\phi_p(t_2),\ldots,\phi_p(t_n))}
+}
+
+\author{Umar Islambekov}
+
+\references{
+1. Chazal, F., Fasy, B. T., Lecci, F., Rinaldo, A., & Wasserman, L. (2014). Stochastic convergence of persistence landscapes and silhouettes. In Proceedings of the thirtieth annual symposium on Computational geometry (pp. 474-483).
+}
+
 \examples{
-N <- 100
+N <- 100 
 set.seed(123)
-X <- TDA::circleUnif(N) + rnorm(2*N,mean = 0,sd = 0.2)
+# sample N points uniformly from unit circle and add Gaussian noise
+X <- TDA::circleUnif(N,r=1) + rnorm(2*N,mean = 0,sd = 0.2)
+
+# compute a persistence diagram using the Rips filtration built on top of X
 D <- TDA::ripsDiag(X,maxdimension = 1,maxscale = 2)$diagram 
+
 scaleSeq = seq(0,2,length.out=11) # sequence of scale values
-computePS(D,homDim=0,p=1,scaleSeq)
+
+# compute persistence silhouette (PS) for homological dimension H_0
+computePS(D,homDim=0,scaleSeq,p=1)
+
+# compute persistence silhouette (PS) for homological dimension H_1
+computePS(D,homDim=1,scaleSeq,p=1)
 }
