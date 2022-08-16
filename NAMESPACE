@@ -2,6 +2,7 @@ exportPattern("^[[:alpha:]]+")
 importFrom(Rcpp, evalCpp)
 importFrom(TDA, circleUnif)
 importFrom(TDA, ripsDiag)
+importFrom(microbenchmark, microbenchmark)
 importFrom("stats", "pnorm")
 useDynLib(TDAvec, .registration = TRUE)
 
