@@ -1,5 +1,7 @@
 exportPattern("^[[:alpha:]]+")
 importFrom(Rcpp, evalCpp)
+importFrom(TDA, circleUnif)
+importFrom(TDA, ripsDiag)
 importFrom("stats", "pnorm")
 useDynLib(TDAvec, .registration = TRUE)
 

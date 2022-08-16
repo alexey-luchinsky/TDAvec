@@ -18,7 +18,7 @@ where \eqn{k\hbox{max}} returns the \eqn{k}th largest value and
 }
 
 \usage{
-computePL(D, homDim, scaleSeq, k=1)
+computePL(D, homDim, scaleSeq, k)
 }
 \arguments{
 \item{D}{matrix with three columns containing the dimension, birth and death values respectively}

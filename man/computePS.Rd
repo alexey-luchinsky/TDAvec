@@ -19,7 +19,7 @@ Points of \eqn{D} with infinite death value are ignored
 }
 
 \usage{
-computePS(D, homDim, scaleSeq, p=1)
+computePS(D, homDim, scaleSeq, p)
 }
 
 \arguments{
