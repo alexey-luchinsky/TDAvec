@@ -9,7 +9,6 @@ Authors@R: c(
 Description: Tools for computing various vector summaries of persistence diagrams 
     studied in Topological Data Analysis. For improved computational efficiency, 
     all code for the vector summaries is written in 'C++' using the 'Rcpp' package.
-    See Kit C. Chan, Umar Islambekov, Alexey Luchinsky, Rebecca Sanders (2021) <arXiv:2109.08239> for more details
 License: GPL (>= 2)
 Encoding: UTF-8
 Imports: Rcpp (>= 1.0.9), TDA, microbenchmark
