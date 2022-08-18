@@ -4,7 +4,8 @@ Title: Vector Summaries of Persistence Diagrams
 Version: 0.1.0
 Authors@R: c(
   person("Umar","Islambekov", email = "iumar@bgsu.edu", role=c("aut")), 
-  person("Alexey", "Luchinsky", email = "aluchi@bgsu.edu", role = c("aut", "cre"))
+  person("Alexey", "Luchinsky", email = "aluchi@bgsu.edu", role = c("aut", "cre")),
+  person("Hasani", "Pathirana", email = "pathirh@bgsu.edu", role = "ctb")
   )
 Description: Tools for computing various vector summaries of persistence diagrams 
     studied in Topological Data Analysis. For improved computational efficiency, 
