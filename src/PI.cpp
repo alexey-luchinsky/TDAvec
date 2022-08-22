@@ -83,7 +83,7 @@ NumericVector y_lower = seq_C(minP,maxP-dy,dy);
 NumericVector y_upper = y_lower + dy;
 int Nsize;
 double sumB = sum(abs(diff(D_(_,0))));
-if ((homDim==0) && (sumB==0)) {
+if ((homDim==0)&(sumB==0)) {
   Nsize = res;
   }else{
   Nsize = pow(res,2);
