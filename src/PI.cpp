@@ -59,7 +59,7 @@ NumericVector computePI(NumericMatrix D,int homDim,
 // D - N by 3 matrix (columns contain dimension, birth and persistence values respectively)
 int n_rows = 0; // number of rows with the correct dimension
   for(int i=0; i<D.nrow(); ++i) {
-    if((D(i,0) == homDim)&(Rcpp::traits::is_finite<REALSXP>(D(i,2)))){
+    if((D(i,0) == homDim) && (Rcpp::traits::is_finite<REALSXP>(D(i,2)))){
       ++n_rows; 
     }
   }
@@ -69,7 +69,7 @@ if (n_rows == 0) return NumericVector(pow(res,2));
 NumericMatrix D_(n_rows,2);
 int j=0;
 for(int i=0; i<D.nrow(); ++i) {
-  if((D(i,0) == homDim)&(Rcpp::traits::is_finite<REALSXP>(D(i,2)))){
+  if((D(i,0) == homDim) && (Rcpp::traits::is_finite<REALSXP>(D(i,2)))){
     D_(j,0) = D(i,1);
     D_(j,1) = D(i,2);
     ++j;
@@ -83,7 +83,7 @@ NumericVector y_lower = seq_C(minP,maxP-dy,dy);
 NumericVector y_upper = y_lower + dy;
 int Nsize;
 double sumB = sum(abs(diff(D_(_,0))));
-if ((homDim==0)&(sumB==0)) {
+if ((homDim==0) && (sumB==0)) {
   Nsize = res;
   }else{
   Nsize = pow(res,2);
