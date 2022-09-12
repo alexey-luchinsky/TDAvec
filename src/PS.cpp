@@ -3,7 +3,7 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-NumericVector computePS(NumericMatrix D, int homDim, NumericVector scaleSeq,int p){
+NumericVector computePS(NumericMatrix D, int homDim, NumericVector scaleSeq,int p=1){
   int n_rows = 0; // number of rows with the correct dimension
   for(int i=0;i<D.nrow();++i){
     if((D(i,0) == homDim) && (Rcpp::traits::is_finite<REALSXP>(D(i,2)))){
