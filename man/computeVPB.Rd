@@ -33,7 +33,7 @@ where \eqn{wdA=(x+y)dxdy}, \eqn{\Delta x_k=x_{k+1}-x_k} and \eqn{\Delta y_j=y_{j
 \author{Umar Islambekov, Aleksei Luchinsky}
 
 \references{
-1. Chan, K. C., Islambekov, U., Luchinsky, A., & Sanders, R. (2022). A computationally efficient framework for vector representation of persistence diagrams. Journal of Machine Learning Research_ 23, 1-33.
+1. Chan, K. C., Islambekov, U., Luchinsky, A., & Sanders, R. (2022). A computationally efficient framework for vector representation of persistence diagrams. Journal of Machine Learning Research 23, 1-33.
 }
 
 \examples{
