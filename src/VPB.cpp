@@ -18,7 +18,7 @@ IntegerVector which_C(LogicalVector vec) {
 // [[Rcpp::export]]
 NumericVector computeVPB(NumericMatrix D, int homDim, 
                                 NumericVector xSeq, NumericVector ySeq,
-                                double tau) {
+                                double tau=0.3) {
   IntegerVector which_C(LogicalVector vec);
   int n_rows = 0; // number of rows with the correct dimension
   for(int i=0; i<D.nrow(); ++i) {
