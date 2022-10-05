@@ -5,12 +5,16 @@ computeECC <- function(D, maxhomDim, scaleSeq) {
     .Call(`_TDAvec_computeECC`, D, maxhomDim, scaleSeq)
 }
 
+computeNL <- function(D, maxhomDim, scaleSeq) {
+    .Call(`_TDAvec_computeNL`, D, maxhomDim, scaleSeq)
+}
+
 computePES <- function(D, homDim, scaleSeq) {
     .Call(`_TDAvec_computePES`, D, homDim, scaleSeq)
 }
 
-computePI <- function(D, homDim, xSeq, ySeq, res, sigma) {
-    .Call(`_TDAvec_computePI`, D, homDim, xSeq, ySeq, res, sigma)
+computePI <- function(D, homDim, xSeq, ySeq, sigma) {
+    .Call(`_TDAvec_computePI`, D, homDim, xSeq, ySeq, sigma)
 }
 
 computePL <- function(D, homDim, scaleSeq, k) {
