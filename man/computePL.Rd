@@ -6,7 +6,7 @@
 
 \description{
 Vectorizes the persistence landscape (PL) function constructed from a given persistence diagram. The \eqn{k}th order landscape function of a persistence diagram \eqn{D=\{(b_i,d_i)\}_{i=1}^N} is defined as 
-\deqn{\lambda_k(t) = k\hbox{max}_{1\leq i \leq N} \Lambda_i(t), \quad k\in N,}
+\deqn{\lambda_k(t) = k\hbox{max}_{1\leq i \leq N} \Lambda_i(t), \quad k\in\mathbb{N},}
 where \eqn{k\hbox{max}} returns the \eqn{k}th largest value and 
 \deqn{\Lambda_i(t) = \left\{
         \begin{array}{ll}
@@ -18,7 +18,7 @@ where \eqn{k\hbox{max}} returns the \eqn{k}th largest value and
 }
 
 \usage{
-computePL(D, homDim, scaleSeq, k)
+computePL(D, homDim, scaleSeq, k=1)
 }
 \arguments{
 \item{D}{matrix with three columns containing the dimension, birth and death values respectively}
