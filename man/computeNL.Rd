@@ -5,7 +5,7 @@
 \title{A Vector Summary of the Normalized Life Curve}
 
 \description{
-For a given persistence diagram \eqn{D=\{(b_i,d_i)\}_{i=1}^N}, \code{computeNL()} vectorizes the normalized life (NL) curve \deqn{sl(t)=\sum_{i=1}^N \frac{d_i-b_i}{L}\mathbb{1}_{[b_i,d_i)}(t),} where \eqn{L=\sum_{i=1}^N (d_i-b_i)}. Points of \eqn{D} with infinite death value are ignored
+For a given persistence diagram \eqn{D=\{(b_i,d_i)\}_{i=1}^N}, \code{computeNL()} vectorizes the normalized life (NL) curve \deqn{sl(t)=\sum_{i=1}^N \frac{d_i-b_i}{L}\bold{1}_{[b_i,d_i)}(t),} where \eqn{L=\sum_{i=1}^N (d_i-b_i)}. Points of \eqn{D} with infinite death value are ignored
 }
 
 \usage{
@@ -23,7 +23,7 @@ computeNL(D, homDim, scaleSeq)
 
 \value{
 A numeric vector whose elements are the average values of the persistent entropy summary function computed between each pair of consecutive scale points of \code{scaleSeq}=\eqn{\{t_1,t_2,\ldots,t_n\}}:
-\deqn{(\frac{1}{\Delta t_1}\int_{t_1}^{t_2}sl(t)dt,\frac{1}{\Delta t_2}\int_{t_2}^{t_3}sl(t)dt,\ldots,\frac{1}{\Delta t_{n-1}}\int_{t_{n-1}}^{t_n}sl(t)dt),}
+\deqn{\Big(\frac{1}{\Delta t_1}\int_{t_1}^{t_2}sl(t)dt,\frac{1}{\Delta t_2}\int_{t_2}^{t_3}sl(t)dt,\ldots,\frac{1}{\Delta t_{n-1}}\int_{t_{n-1}}^{t_n}sl(t)dt\Big),}
 where \eqn{\Delta t_k=t_{k+1}-t_k}
 }
 

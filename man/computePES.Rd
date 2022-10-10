@@ -5,7 +5,7 @@
 \title{A Vector Summary of the Persistent Entropy Summary Function}
 
 \description{
-For a given persistence diagram \eqn{D=\{(b_i,d_i)\}_{i=1}^N}, \code{computePES()} vectorizes the persistent entropy summary (PES) function \deqn{S(t)=-\sum_{i=1}^N \frac{l_i}{L}\log_2{(\frac{l_i}{L}})\mathbb{1}_{[b_i,d_i]}(t),} where \eqn{l_i=d_i-b_i} and \eqn{L=\sum_{i=1}^Nl_i}. Points of \eqn{D} with infinite death value are ignored
+For a given persistence diagram \eqn{D=\{(b_i,d_i)\}_{i=1}^N}, \code{computePES()} vectorizes the persistent entropy summary (PES) function \deqn{S(t)=-\sum_{i=1}^N \frac{l_i}{L}\log_2{(\frac{l_i}{L}})\bold 1_{[b_i,d_i]}(t),} where \eqn{l_i=d_i-b_i} and \eqn{L=\sum_{i=1}^Nl_i}. Points of \eqn{D} with infinite death value are ignored
 }
 
 \usage{
@@ -23,7 +23,7 @@ computePES(D, homDim, scaleSeq)
 
 \value{
 A numeric vector whose elements are the average values of the persistent entropy summary function computed between each pair of consecutive scale points of \code{scaleSeq}=\eqn{\{t_1,t_2,\ldots,t_n\}}:
-\deqn{(\frac{1}{\Delta t_1}\int_{t_1}^{t_2}S(t)dt,\frac{1}{\Delta t_2}\int_{t_2}^{t_3}S(t)dt,\ldots,\frac{1}{\Delta t_{n-1}}\int_{t_{n-1}}^{t_n}S(t)dt),}
+\deqn{\Big(\frac{1}{\Delta t_1}\int_{t_1}^{t_2}S(t)dt,\frac{1}{\Delta t_2}\int_{t_2}^{t_3}S(t)dt,\ldots,\frac{1}{\Delta t_{n-1}}\int_{t_{n-1}}^{t_n}S(t)dt\Big),}
 where \eqn{\Delta t_k=t_{k+1}-t_k}
 }
 

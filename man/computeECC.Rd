@@ -24,7 +24,7 @@ computeECC(D, maxhomDim, scaleSeq)
 \value{
 A numeric vector whose elements are the average values of the Euler characteristic curve computed between each pair of
 consecutive scale points of \code{scaleSeq}=\eqn{\{t_1,t_2,\ldots,t_n\}}:
-\deqn{(\frac{1}{\Delta t_1}\int_{t_1}^{t_2}\chi(t)dt,\frac{1}{\Delta t_2}\int_{t_2}^{t_3}\chi(t)dt,\ldots,\frac{1}{\Delta t_{n-1}}\int_{t_{n-1}}^{t_n}\chi(t)dt),}
+\deqn{\Big(\frac{1}{\Delta t_1}\int_{t_1}^{t_2}\chi(t)dt,\frac{1}{\Delta t_2}\int_{t_2}^{t_3}\chi(t)dt,\ldots,\frac{1}{\Delta t_{n-1}}\int_{t_{n-1}}^{t_n}\chi(t)dt\Big),}
 where \eqn{\Delta t_k=t_{k+1}-t_k}
 }
 
