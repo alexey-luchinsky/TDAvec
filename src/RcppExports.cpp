@@ -125,8 +125,8 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_TDAvec_computeNL", (DL_FUNC) &_TDAvec_computeNL, 3},
     {"_TDAvec_computeECC", (DL_FUNC) &_TDAvec_computeECC, 3},
+    {"_TDAvec_computeNL", (DL_FUNC) &_TDAvec_computeNL, 3},
     {"_TDAvec_computePES", (DL_FUNC) &_TDAvec_computePES, 3},
     {"_TDAvec_computePI", (DL_FUNC) &_TDAvec_computePI, 6},
     {"_TDAvec_computePL", (DL_FUNC) &_TDAvec_computePL, 4},
