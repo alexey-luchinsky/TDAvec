@@ -1,7 +1,7 @@
 Package: TDAvec
 Type: Package
 Title: Vector Summaries of Persistence Diagrams
-Version: 0.1.1
+Version: 0.1.0
 Authors@R: c(
   person("Umar","Islambekov", email = "iumar@bgsu.edu", role=c("aut")), 
   person("Alexey", "Luchinsky", email = "aluchi@bgsu.edu", role = c("aut", "cre")),
