@@ -111,12 +111,13 @@ where $\Delta t_k=t_{k+1}-t_k$, $k=1,\ldots,n-1$. For the above five summary fun
 The `TDA::silhouette()` function vectorizes the persistence silhouette function the same way as the `TDA::landscape()` function does. However, `TDA::silhouette()` and `TDAvec::computePS()` provide similar results if a dense grid of scale values is used for vectorization:
 
 ```{r}
-scaleSeq = seq(0,2,length.out=101)
+n <- 101
+scaleSeq = seq(0,2,length.out=n)
 ps1 <- computePS(D,homDim = 0, p = 1,scaleSeq)
 ps2 <- as.vector(silhouette(D,dimension = 0,p = 1,tseq = scaleSeq))
 
 # plot two vector summaries
-plot(scaleSeq[1:100]+0.01,ps1,
+plot(scaleSeq[1:(n-1)]+1/(n-1),ps1,
      type="l",col="red",xlab="x",ylab="y",lty=1)
 lines(scaleSeq,ps2,type='l',col='blue',lty=2)
 legend(1.48, 0.122, legend=c("TDAvec","TDA"),
