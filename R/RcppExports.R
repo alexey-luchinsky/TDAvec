@@ -5,8 +5,8 @@ computeECC <- function(D, maxhomDim, scaleSeq) {
     .Call(`_TDAvec_computeECC`, D, maxhomDim, scaleSeq)
 }
 
-computeNL <- function(D, maxhomDim, scaleSeq) {
-    .Call(`_TDAvec_computeNL`, D, maxhomDim, scaleSeq)
+computeNL <- function(D, homDim, scaleSeq) {
+    .Call(`_TDAvec_computeNL`, D, homDim, scaleSeq)
 }
 
 computePES <- function(D, homDim, scaleSeq) {
@@ -17,11 +17,11 @@ computePI <- function(D, homDim, xSeq, ySeq, sigma) {
     .Call(`_TDAvec_computePI`, D, homDim, xSeq, ySeq, sigma)
 }
 
-computePL <- function(D, homDim, scaleSeq, k) {
+computePL <- function(D, homDim, scaleSeq, k = 1L) {
     .Call(`_TDAvec_computePL`, D, homDim, scaleSeq, k)
 }
 
-computePS <- function(D, homDim, scaleSeq, p) {
+computePS <- function(D, homDim, scaleSeq, p = 1L) {
     .Call(`_TDAvec_computePS`, D, homDim, scaleSeq, p)
 }
 
@@ -29,7 +29,7 @@ computeVAB <- function(D, homDim, scaleSeq) {
     .Call(`_TDAvec_computeVAB`, D, homDim, scaleSeq)
 }
 
-computeVPB <- function(D, homDim, xSeq, ySeq, tau) {
+computeVPB <- function(D, homDim, xSeq, ySeq, tau = 0.3) {
     .Call(`_TDAvec_computeVPB`, D, homDim, xSeq, ySeq, tau)
 }
 
